@@ -15,7 +15,8 @@ def read(filename):
 
 setup(
     name="nhk-easy",
-    version="0.0.1",
+    version="0.0.4",
+    python_requires=">3.0.0",
     url="https://github.com/TianyiShi2001/nhk-easy",
     license="MIT",
     author="Tianyi Shi",
@@ -33,5 +34,5 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    entry_points={"console_scripts": ["nhk=reader.__main__:main",]},
+    entry_points={"console_scripts": ["nhk-easy=nhk_easy.__main__:main",]},
 )
