@@ -2,7 +2,7 @@
 
 An API for [NHK News Web Easy](https://www3.nhk.or.jp/news/easy/).
 
-It includes a command-line application that supports download of audio (as `.m3u8` playlists or `.mp3`) and text (without furigana) of today's top news articles displayed on the homepage of [NHK News Web Easy](https://www3.nhk.or.jp/news/easy/).
+It includes a command-line application that supports download of audio (as `.m3u8` playlists or `.mp3`) and text (with or without furigana, in plain text or HTML) of today's top news articles displayed on the homepage of [NHK News Web Easy](https://www3.nhk.or.jp/news/easy/).
 
 # Installation
 
@@ -13,27 +13,49 @@ pip install nhk-easy
 # Synopsis
 
 ```
-$ nhk-easy --help
-usage: Download today's NHK easy news [-h] [-m] [-d DIRECTORY]
+usage: nhk-easy [-h] [-M] [-d DIRECTORY] [-F] [-H]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -m, --mp3             Download mp3 audio instead of m3u8 playlist (ffmpeg required)
+  -M, --mp3             Download mp3 audio instead of m3u8 playlist (ffmpeg required)
   -d DIRECTORY, --directory DIRECTORY
-                        directory
+                        output directory
+  -F, --furigana        enable furigana
+  -H, --html            HTML output (default is txt)
 ```
 
 # Usage
+
+To start with, try `nhk-easy` alone (with default options):
 
 ```
 nhk-easy
 ```
 
-This downloads text (in `.txt` files) and the audio playlist (in `.m3u8` format) of all top articles currectly shown on https://www3.nhk.or.jp/news/easy/ .
+This downloads:
+  1. plain text without furigana in `.txt` files, and
+  2. the `.m3u8` playlist file of the audio
+
+of all top articles currectly shown on https://www3.nhk.or.jp/news/easy/
 
 `m3u8` playlists can be streamed by VLC, for example, to play audio.
 
-If you have [**ffmpeg**](https://ffmpeg.org) installed, you can use the `-mp3` option to download `.mp3` audio instead of `.m3u8`.
+If you want furigana, use the flag `--furigana` (`-F`). If you want HTML output instead of plain text, use the flag `--html` (`-F`). In plain text, furigana guides are shown in parentheses; in HTML output, they are contained within `ruby` tags.
+
+If you have [**ffmpeg**](https://ffmpeg.org) installed, you may use the `--mp3` (`-M`) flag to download `.mp3` audio files instead of `.m3u8` playlists.
+
+You can use the `--directory` (`-d`) flag to specify the output directory (defaults to the currect directory).
+
+Example output:
+
+```
+$ mkdir outdir && nhk-easy -MFH -d outdir && ls outdir
+2020-07-08-避難所でコロナウイルスがうつらないように気をつけること.mp3
+2020-07-08-避難所でコロナウイルスがうつらないように気をつけること.html
+2020-07-09-コロナウイルスのアプリ　うつったことを知らせた人は３人.mp3
+2020-07-09-コロナウイルスのアプリ　うつったことを知らせた人は３人.html
+......
+```
 
 # Copyright Notice
 
@@ -52,7 +74,7 @@ You should abide by [NHK's copyright notice](https://www.nhk.or.jp/toppage/nhk_i
 
 ## Fail to Download mp3
 
-### `ffmpeg` freezes due to bad internet connection
+### `ffmpeg` freezes due to unstable internet connection
 
 - `ctrl+C` and/or `ctrl+D` to exit.
 - Delete any incomplete file(s).
@@ -62,7 +84,7 @@ You should abide by [NHK's copyright notice](https://www.nhk.or.jp/toppage/nhk_i
 
 #### `dyld: Library not loaded: /usr/local/opt/libffi/lib/libffi.6.dylib`
 
-See https://github.com/platformio/platform-lattice_ice40/issues/7 . The following commands are the most widely accepted:
+See https://github.com/platformio/platform-lattice_ice40/issues/7 . This is the most widely accepted solution:
 
 ```
 cd /usr/local/opt/libffi/lib
