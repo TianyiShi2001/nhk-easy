@@ -40,7 +40,7 @@ of all top articles currectly shown on https://www3.nhk.or.jp/news/easy/
 
 `m3u8` playlists can be streamed by VLC, for example, to play audio.
 
-If you want furigana, use the flag `--furigana` (`-F`). If you want HTML output instead of plain text, use the flag `--html` (`-F`). In plain text, furigana guides are shown in parentheses; in HTML output, they are contained within `ruby` tags.
+The flag `--furigana` (`-F`) enables furigana. If you want HTML output instead of plain text, use the flag `--html` (`-H`). In plain text, furigana guides are shown in parentheses; in HTML output, they are contained within `ruby` tags.
 
 If you have [**ffmpeg**](https://ffmpeg.org) installed, you may use the `--mp3` (`-M`) flag to download `.mp3` audio files instead of `.m3u8` playlists.
 
