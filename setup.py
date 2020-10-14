@@ -15,7 +15,7 @@ def read(filename):
 
 setup(
     name="nhk-easy",
-    version="0.0.6",
+    version="0.0.9",
     python_requires=">3.0.0",
     url="https://github.com/TianyiShi2001/nhk-easy",
     license="MIT",
